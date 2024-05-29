@@ -43,7 +43,8 @@ Herramientas: Eclipseenterprice, TOMCAT 9.0, Maven, Sprintool4 configuramos para
 Cada Integrante subira el proyecto a Github
 
 Cuenta de Github:
-SCHEREZADE:
+SCHEREZADE:https://github.com/ShahrazadM/EXAMENFINALModulo6
+
 RUBEN:
 FRASIEL:
 GABRIEL:
