@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
+ 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	xmlns="http://www.springframework.org/schema/security"
+ 	xsi:schemaLocation="http://www.springframework.org/schema/beans
+  		http://www.springframework.org/schema/beans/spring-beans.xsd
+  		http://www.springframework.org/schema/security
+  		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http auto-config="true">
+	 	<intercept-url pattern="/" access="permitAll"/>
+	 	<!--admin-->
+	 	<intercept-url pattern="/listarusuarios" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/listarpagos" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/crearpago" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/editarusuarios" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/crearusuario" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/editaradministrativo" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/editarcliente" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/listaparaeditaridCLIE" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/listaparaeditaridADMI" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/listaadministrativos" access="hasAnyAuthority ('admi')"/>
+	 	<intercept-url pattern="/listaclientes" access="hasAnyAuthority ('admi')"/>
+	 	
+	 	<!-- clie -->
+	 	
+	 	<intercept-url pattern="/listarcapacitacion" access="hasAnyAuthority ('clie')"/>
+	 	<intercept-url pattern="/listarcontacto" access="hasAnyAuthority ('clie')"/>
+	 	<intercept-url pattern="/crearcontacto" access="hasAnyAuthority ('clie')"/>
+	 	<intercept-url pattern="/crearcapacitacion" access="hasAnyAuthority ('clie')"/>
+	 	
+	 	<!-- prof -->
+	 	<intercept-url pattern="/listachequeos" access="hasAnyAuthority ('prof')"/>
+	 	<intercept-url pattern="/listadovisitas" access="hasAnyAuthority ('prof')"/>
+	 	<intercept-url pattern="/crearvisita" access="hasAnyAuthority ('prof')"/>
+	 	
+	 	
+	 	<form-login login-page="/login"
+	 		authentication-failure-url="/error"
+	 		username-parameter="username"
+	 		password-parameter="password"/>
+	 	<csrf disabled="true"/>
+	 	<logout logout-success-url="/login?logout"/>
+	 	
+    <!-- Agregar el manejador de acceso denegado -->
+    <access-denied-handler error-page="/accesodenegado" />
+	
+    
+	 	
+	</http>
+	
+	
+	<authentication-manager>
+        <authentication-provider>
+            <password-encoder hash="bcrypt"/>
+            <!-- Usuarios autorizados -->
+            <user-service>
+            	 <user name="ruben" authorities="admi" password="$2a$10$cmMUDZqKunD5mv1E3PqZN.48YaSjsnlxF3Ug.LzPF0msHrnGF5KPG"/>
+                <user name="frasiel" authorities="clie" password="$2a$10$Vu8NtCnXxgEyTTPpMJLIdeQbyPfowvBa9gOCm62We3PMDt/H1ZgRq"/>
+            	 <user name="nayareth" authorities="prof" password="$2a$10$sx2wAvlO1fwq4Fo41.Dn3ulclo1.q/ui7ocCm7ZV6uQw1DdS1nS0W"/>
+        
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</bean:beans>
